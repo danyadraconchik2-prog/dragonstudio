@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Studio | Official Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #ff3e3e;
+            --bg-dark: #0a0a0a;
+            --card-bg: #151515;
+            --text-light: #ffffff;
+            --accent-glow: rgba(255, 62, 62, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Lang Switcher */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #2a0000 0%, #0a0a0a 100%);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo-container h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            filter: drop-shadow(0 0 15px var(--accent-glow));
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+        section h2 { font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 60px; text-align: center; position: relative; }
+        section h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary-color); margin: 15px auto; }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.4s;
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--primary-color); }
+        .project-preview { height: 200px; background: #111; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .project-content { padding: 25px; flex-grow: 1; }
+        .project-content h3 { font-family: 'Orbitron', sans-serif; color: var(--primary-color); margin-bottom: 10px; }
+        
+        .download-btn {
+            display: block;
+            width: 85%;
+            margin: 10px auto;
+            padding: 12px;
+            text-align: center;
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        .download-btn:hover { background: var(--primary-color); box-shadow: 0 0 15px var(--primary-color); }
+
+        /* Support Window Styles */
+        .support-window {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 260px;
+            background: #111;
+            border: 1px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            z-index: 999;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .support-window h4 {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .support-tg-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .support-tg-btn:hover {
+            box-shadow: 0 0 15px var(--primary-color);
+            transform: scale(1.03);
+        }
+
+        .team-members { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-top: 40px; }
+        .member-card { text-align: center; background: #0d0d0d; padding: 30px; border-radius: 20px; border: 1px solid #222; width: 280px; }
+        
+        .avatar-img { 
+            width: 140px; 
+            height: 140px; 
+            background: var(--card-bg); 
+            border: 3px solid var(--primary-color); 
+            border-radius: 50%; 
+            margin: 0 auto 15px; 
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Fixed Image Links */
+        #avatar-owner { background-image: url('https://lh3.googleusercontent.com/d/13Gkhj0GtTsm128-pxM2vmFJSvrg1D8if'); }
+        #avatar-co { background-image: url('https://lh3.googleusercontent.com/d/1MBlv3KnsoqcHxbC-7dXPItJV_Yz_7SqV'); }
+
+        footer { padding: 40px; text-align: center; opacity: 0.5; font-size: 0.8rem; border-top: 1px solid #222; }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <button class="lang-btn" onclick="setLang('ru')">RU</button>
+        <button class="lang-btn active" onclick="setLang('ua')">UA</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <h1 id="main-title">DRAGON STUDIO</h1>
+        </div>
+        <p class="subtitle" id="main-sub">Creating the Impossible</p>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2 id="sect-projects">Наші розробки</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-preview">💰</div>
+                    <div class="project-content">
+                        <h3>Dragon Clicker</h3>
+                        <p id="desc-clicker">Твій шлях до першого мільйона золотих монет.</p>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1GZ0N3mIqH3uS9f9A2zXo0_9XmS0E8_uH/view" class="download-btn" id="btn-1">ЗАВАНТАЖИТИ</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-preview">🎨</div>
+                    <div class="project-content">
+                        <h3>Mimpi DLC</h3>
+                        <p id="desc-mimpi">Нові рівні та захоплюючий сюжет.</p>
+                    </div>
+                    <a href="#" class="download-btn" id="btn-2">ЗАВАНТАЖИТИ</a>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-top: 80px;">
+            <h2 id="sect-team">Команда</h2>
+            <div class="team-members">
+                <div class="member-card">
+                    <div class="avatar-img" id="avatar-owner"></div>
+                    <h3>danya_draconchik1</h3>
+                    <p id="role-owner">Засновник / Lead Dev</p>
+                </div>
+                <div class="member-card">
+                    <div class="avatar-img" id="avatar-co"></div>
+                    <h3>koshka_ray</h3>
+                    <p id="role-co">Співвласник / Designer</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SUPPORT WINDOW -->
+    <div class="support-window">
+        <h4 id="supp-title">ПІДТРИМКА</h4>
+        <a href="https://t.me/Koshka_Ray" target="_blank" class="support-tg-btn" id="supp-btn">НАПИСАТИ</a>
+    </div>
+
+    <footer>
+        <p id="footer-text">&copy; 2026 Dragon Studio. danya_draconchik1 & koshka_ray</p>
+    </footer>
+
+    <script>
+        const texts = {
+            ru: {
+                sub: "Создаем невозможное",
+                projects: "Наши разработки",
+                team: "Команда",
+                clicker: "Твой путь к первому миллиону золотых монет.",
+                mimpi: "Новые уровни и захватывающий сюжет.",
+                owner: "Создатель / Lead Dev",
+                co: "Со-владелец / Designer",
+                btn: "СКАЧАТЬ",
+                suppTitle: "ПОДДЕРЖКА",
+                suppBtn: "НАПИСАТЬ",
+                footer: "© 2026 Dragon Studio. Все права защищены."
+            },
+            ua: {
+                sub: "Створюємо неможливе",
+                projects: "Наші розробки",
+                team: "Команда",
+                clicker: "Твій шлях до першого мільйона золотих монет.",
+                mimpi: "Нові рівні та захоплюючий сюжет.",
+                owner: "Засновник / Lead Dev",
+                co: "Співвласник / Designer",
+                btn: "ЗАВАНТАЖИТИ",
+                suppTitle: "ПІДТРИМКА",
+                suppBtn: "НАПИСАТИ",
+                footer: "© 2026 Dragon Studio. Всі права застережені."
+            },
+            en: {
+                sub: "Creating the Impossible",
+                projects: "Our Projects",
+                team: "Team",
+                clicker: "Your path to the first million gold coins.",
+                mimpi: "New levels and exciting storyline.",
+                owner: "Owner / Lead Dev",
+                co: "Co-Owner / Designer",
+                btn: "DOWNLOAD",
+                suppTitle: "SUPPORT",
+                suppBtn: "CONTACT",
+                footer: "© 2026 Dragon Studio. All rights reserved."
+            }
+        };
+
+        function setLang(lang) {
+            document.getElementById('main-sub').innerText = texts[lang].sub;
+            document.getElementById('sect-projects').innerText = texts[lang].projects;
+            document.getElementById('sect-team').innerText = texts[lang].team;
+            document.getElementById('desc-clicker').innerText = texts[lang].clicker;
+            document.getElementById('desc-mimpi').innerText = texts[lang].mimpi;
+            document.getElementById('role-owner').innerText = texts[lang].owner;
+            document.getElementById('role-co').innerText = texts[lang].co;
+            document.getElementById('btn-1').innerText = texts[lang].btn;
+            document.getElementById('btn-2').innerText = texts[lang].btn;
+            document.getElementById('supp-title').innerText = texts[lang].suppTitle;
+            document.getElementById('supp-btn').innerText = texts[lang].suppBtn;
+            document.getElementById('footer-text').innerText = texts[lang].footer;
+
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+        }
+        
+        setLang('ua');
+    </script>
+</body>
+</html>
