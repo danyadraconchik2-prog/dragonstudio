@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Studio | Official Portfolio</title>
+    <style>
+        html, body {
+            height: 100%; margin: 0;
+            background-color: #0a0a0a; color: white;
+            font-family: 'Segoe UI', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* ШАПКА */
+        .header {
+            position: absolute; top: 0; right: 0;
+            display: flex; padding: 20px; z-index: 10;
+        }
+        .lang-btn {
+            background: rgba(26, 26, 26, 0.8); color: white; border: 1px solid #333;
+            padding: 5px 15px; margin-left: 5px; cursor: pointer; border-radius: 4px;
+        }
+        .lang-btn.active { background: #ff0000; border-color: #ff0000; }
+
+        /* ГОЛОВНИЙ ЕКРАН */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            background: radial-gradient(circle, #2a0000 0%, #0a0a0a 100%);
+            text-align: center;
+        }
+        .hero h1 { font-size: 5rem; margin: 0; letter-spacing: 5px; text-transform: uppercase; }
+        .hero p { color: #ccc; font-size: 1.5rem; margin-top: 20px; }
+
+        .section-title { font-size: 2.5rem; margin: 80px 0 40px; text-align: center; }
+        .section-title::after {
+            content: ''; display: block; width: 80px; height: 5px;
+            background: red; margin: 15px auto;
+        }
+
+        /* КАРТКИ (Ось тут магія кнопок) */
+        .container {
+            display: flex; justify-content: center; gap: 40px;
+            padding: 0 40px; flex-wrap: wrap; margin-bottom: 100px;
+        }
+        .card {
+            background: #111; border-radius: 20px; width: 450px;
+            padding: 50px; border: 1px solid #222; text-align: left;
+        }
+        .card h3 { color: #ff0000; font-size: 1.8rem; margin-bottom: 15px; }
+        .card p { color: #aaa; font-size: 1.1rem; margin-bottom: 40px; min-height: 60px; }
+
+        .btn {
+            display: block; width: 100%; padding: 18px;
+            background-color: transparent;
+            border: 2px solid #ff0000; color: white;
+            text-decoration: none; font-weight: bold; font-size: 1.1rem;
+            border-radius: 8px; text-align: center; box-sizing: border-box;
+            transition: 0.3s ease;
+        }
+        .btn:hover { background-color: #ff0000; color: white; }
+        .btn.disabled { border-color: #444; color: #666; cursor: not-allowed; background: transparent; }
+
+        /* КОМАНДА */
+        .team-container { display: flex; justify-content: center; gap: 80px; padding-bottom: 150px; }
+        .member-card { text-align: center; }
+        .member-photo {
+            width: 200px; height: 200px;
+            border-radius: 50%; border: 5px solid red;
+            object-fit: cover; background: #111;
+        }
+        .member-name { margin-top: 20px; font-weight: bold; color: #ff0000; font-size: 1.4rem; display: block; }
+        .member-role { color: #888; font-size: 1rem; margin-top: 5px; }
+
+        /* ПІДТРИМКА */
+        .support-widget {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #111; border: 2px solid #ff0000;
+            padding: 15px 30px; border-radius: 50px;
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); z-index: 1000;
+        }
+        .support-widget p { margin: 0; font-size: 16px; font-weight: bold; }
+        .write-btn {
+            background: #ff0000; color: white; text-decoration: none;
+            padding: 10px 20px; border-radius: 25px; font-size: 14px;
+            font-weight: bold; transition: 0.3s;
+        }
+        .write-btn:hover { background: white; color: red; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <button id="btn-ru" class="lang-btn" onclick="setLang('ru')">RU</button>
+        <button id="btn-ua" class="lang-btn active" onclick="setLang('ua')">UA</button>
+        <button id="btn-en" class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+
+    <div class="hero">
+        <h1>DRAGON STUDIO</h1>
+        <p id="hero-sub">Створюємо неможливе</p>
+    </div>
+
+    <h2 id="dev-title" class="section-title">Наші розробки</h2>
+    
+    <div class="container">
+        <div class="card">
+            <h3>Dragon Clicker</h3>
+            <p id="desc-clicker">Твій шлях до першого мільйона золотих монет.</p>
+            <a href="https://drive.google.com/file/d/1Ln3_qwQ2aGn4XDJ_VHpvhRtsw7mBEVYu/view?usp=sharing" target="_blank" class="btn" id="btn-clicker-text">СКАЧАТИ ГРУ</a>
+        </div>
+
+        <div class="card">
+            <h3>Mimpi DLC</h3>
+            <p id="desc-mimpi">Нові рівні та захоплюючий сюжет для Mimpi Dreams.</p>
+            <div class="btn disabled" id="btn-mimpi">СКОРО ВИЙДЕ</div>
+        </div>
+    </div>
+
+    <h2 id="team-title" class="section-title">Команда</h2>
+    <div class="team-container">
+        <div class="member-card">
+            <img src="danya.jpg" class="member-photo">
+            <span class="member-name">Danya_Draconchik1</span>
+            <div class="member-role" id="role-owner">власник</div>
+        </div>
+        <div class="member-card">
+            <img src="sonya.jpg" class="member-photo">
+            <span class="member-name">Koshka_Ray</span>
+            <div class="member-role" id="role-coowner">спів власник</div>
+        </div>
+    </div>
+
+    <div class="support-widget">
+        <p id="support-label">Підтримка</p>
+        <a href="https://t.me/Koshka_Ray" target="_blank" class="write-btn" id="write-text">НАПИСАТИ</a>
+    </div>
+
+    <script>
+        const translations = {
+            'ua': {
+                hero: 'Створюємо неможливе', dev: 'Наші розробки', team: 'Команда',
+                clicker: 'Твій шлях до першого мільйона золотих монет.',
+                clicker_btn: 'СКАЧАТИ ГРУ',
+                mimpi: 'Нові рівні та захоплюючий сюжет для Mimpi Dreams.',
+                mimpi_btn: 'СКОРО ВИЙДЕ', sup_label: 'Підтримка', write: 'НАПИСАТИ',
+                owner: 'власник', coowner: 'спів власник'
+            },
+            'ru': {
+                hero: 'Создаем невозможное', dev: 'Наши разработки', team: 'Команда',
+                clicker: 'Твой путь к первому миллиону золотых монет.',
+                clicker_btn: 'СКАЧАТЬ ИГРУ',
+                mimpi: 'Новые уровни и захватывающий сюжет для Mimpi Dreams.',
+                mimpi_btn: 'СКОРО ВЫЙДЕТ', sup_label: 'Поддержка', write: 'НАПИСАТЬ',
+                owner: 'владелец', coowner: 'совладелец'
+            },
+            'en': {
+                hero: 'Creating the impossible', dev: 'Our Projects', team: 'Team',
+                clicker: 'Your way to the first million gold coins.',
+                clicker_btn: 'DOWNLOAD GAME',
+                mimpi: 'New levels and an exciting plot for Mimpi Dreams.',
+                mimpi_btn: 'COMING SOON', sup_label: 'Support', write: 'WRITE',
+                owner: 'owner', coowner: 'co-owner'
+            }
+        };
+
+        function setLang(lang) {
+            document.getElementById('hero-sub').innerText = translations[lang].hero;
+            document.getElementById('dev-title').innerText = translations[lang].dev;
+            document.getElementById('team-title').innerText = translations[lang].team;
+            document.getElementById('desc-clicker').innerText = translations[lang].clicker;
+            document.getElementById('btn-clicker-text').innerText = translations[lang].clicker_btn;
+            document.getElementById('desc-mimpi').innerText = translations[lang].mimpi;
+            document.getElementById('btn-mimpi').innerText = translations[lang].mimpi_btn;
+            document.getElementById('support-label').innerText = translations[lang].sup_label;
+            document.getElementById('write-text').innerText = translations[lang].write;
+            document.getElementById('role-owner').innerText = translations[lang].owner;
+            document.getElementById('role-coowner').innerText = translations[lang].coowner;
+
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+        }
+    </script>
+</body>
+</html>
