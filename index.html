@@ -5,297 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dragon Studio | Official Portfolio</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
-
-        :root {
-            --primary-color: #ff3e3e;
-            --bg-dark: #0a0a0a;
-            --card-bg: #151515;
-            --text-light: #ffffff;
-            --accent-glow: rgba(255, 62, 62, 0.4);
+        html, body {
+            height: 100%; margin: 0;
+            background-color: #0a0a0a; color: white;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
+        /* ШАПКА З ТРЬОМА МОВАМИ */
+        .header {
+            position: absolute; top: 0; right: 0;
+            display: flex; padding: 20px; z-index: 10;
         }
-
-        /* Lang Switcher */
-        .lang-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            gap: 10px;
-        }
-
         .lang-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--primary-color);
-            color: white;
-            padding: 5px 12px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            transition: 0.3s;
-            font-size: 0.8rem;
+            background: rgba(26, 26, 26, 0.8); color: white; border: 1px solid #333;
+            padding: 5px 15px; margin-left: 5px; cursor: pointer; border-radius: 4px;
         }
+        .lang-btn.active { background: #ff0000; border-color: #ff0000; }
 
-        .lang-btn.active {
-            background: var(--primary-color);
-            box-shadow: 0 0 10px var(--primary-color);
-        }
-
-        header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at center, #2a0000 0%, #0a0a0a 100%);
+        /* ГОЛОВНИЙ ЕКРАН НА ВЕСЬ МОНІТОР */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            background: radial-gradient(circle, #2a0000 0%, #0a0a0a 100%);
             text-align: center;
-            padding: 20px;
+        }
+        .hero h1 { font-size: 5rem; margin: 0; letter-spacing: 5px; text-transform: uppercase; }
+        .hero p { color: #ccc; font-size: 1.5rem; margin-top: 20px; }
+
+        .section-title { font-size: 2.5rem; margin: 80px 0 40px; text-align: center; }
+        .section-title::after {
+            content: ''; display: block; width: 80px; height: 5px;
+            background: red; margin: 15px auto;
         }
 
-        .logo-container h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            filter: drop-shadow(0 0 15px var(--accent-glow));
+        /* КАРТКИ РОЗРОБОК */
+        .container {
+            display: flex; justify-content: center; gap: 40px;
+            padding: 0 40px; flex-wrap: wrap; margin-bottom: 100px;
         }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
-        section h2 { font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 60px; text-align: center; position: relative; }
-        section h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary-color); margin: 15px auto; }
-
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid #222;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: 0.4s;
-            padding-bottom: 20px;
-            display: flex;
-            flex-direction: column;
+        .card {
+            background: #111; border-radius: 20px; width: 450px;
+            padding: 50px; border: 1px solid #222; text-align: left;
         }
-        .project-card:hover { transform: translateY(-10px); border-color: var(--primary-color); }
-        .project-preview { height: 200px; background: #111; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
-        .project-content { padding: 25px; flex-grow: 1; }
-        .project-content h3 { font-family: 'Orbitron', sans-serif; color: var(--primary-color); margin-bottom: 10px; }
-        
-        .download-btn {
-            display: block;
-            width: 85%;
-            margin: 10px auto;
-            padding: 12px;
-            text-align: center;
-            background: transparent;
-            border: 1px solid var(--primary-color);
-            color: white;
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            transition: 0.3s;
+        .card h3 { color: #ff0000; font-size: 1.8rem; margin-bottom: 15px; }
+        .card p { color: #aaa; font-size: 1.1rem; margin-bottom: 40px; min-height: 60px; }
+
+        .btn {
+            display: block; width: 100%; padding: 18px;
+            border: 2px solid #ff0000; color: white;
+            text-decoration: none; font-weight: bold; font-size: 1.1rem;
+            border-radius: 8px; text-align: center; box-sizing: border-box;
         }
-        .download-btn:hover { background: var(--primary-color); box-shadow: 0 0 15px var(--primary-color); }
+        .btn:not(.disabled):hover { background: #ff0000; }
+        .btn.disabled { border-color: #444; color: #666; cursor: not-allowed; }
 
-        /* Support Window Styles */
-        .support-window {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 260px;
-            background: #111;
-            border: 1px solid var(--primary-color);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            z-index: 999;
-            text-align: center;
-            font-family: 'Orbitron', sans-serif;
+        /* КОМАНДА З НІКНЕЙМАМИ */
+        .team-container { display: flex; justify-content: center; gap: 80px; padding-bottom: 150px; }
+        .member-card { text-align: center; }
+        .member-photo {
+            width: 200px; height: 200px;
+            border-radius: 50%; border: 5px solid red;
+            object-fit: cover; background: #111;
         }
+        .member-name { margin-top: 20px; font-weight: bold; color: #ff0000; font-size: 1.4rem; display: block; }
+        .member-role { color: #888; font-size: 1rem; margin-top: 5px; }
 
-        .support-window h4 {
-            color: var(--primary-color);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
+        /* ВІДЖЕТ ПІДТРИМКИ */
+        .support-widget {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #111; border: 2px solid #ff0000;
+            padding: 15px 30px; border-radius: 50px;
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); z-index: 1000;
         }
-
-        .support-tg-btn {
-            display: inline-block;
-            background: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            transition: 0.3s;
-            width: 100%;
+        .support-widget p { margin: 0; font-size: 16px; font-weight: bold; }
+        .write-btn {
+            background: #ff0000; color: white; text-decoration: none;
+            padding: 10px 20px; border-radius: 25px; font-size: 14px;
+            font-weight: bold; transition: 0.3s;
         }
-
-        .support-tg-btn:hover {
-            box-shadow: 0 0 15px var(--primary-color);
-            transform: scale(1.03);
-        }
-
-        .team-members { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-top: 40px; }
-        .member-card { text-align: center; background: #0d0d0d; padding: 30px; border-radius: 20px; border: 1px solid #222; width: 280px; }
-        
-        .avatar-img { 
-            width: 140px; 
-            height: 140px; 
-            background: var(--card-bg); 
-            border: 3px solid var(--primary-color); 
-            border-radius: 50%; 
-            margin: 0 auto 15px; 
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Fixed Image Links */
-        #avatar-owner { background-image: url('https://lh3.googleusercontent.com/d/13Gkhj0GtTsm128-pxM2vmFJSvrg1D8if'); }
-        #avatar-co { background-image: url('https://lh3.googleusercontent.com/d/1MBlv3KnsoqcHxbC-7dXPItJV_Yz_7SqV'); }
-
-        footer { padding: 40px; text-align: center; opacity: 0.5; font-size: 0.8rem; border-top: 1px solid #222; }
+        .write-btn:hover { background: white; color: red; }
     </style>
 </head>
 <body>
 
-    <div class="lang-switcher">
-        <button class="lang-btn" onclick="setLang('ru')">RU</button>
-        <button class="lang-btn active" onclick="setLang('ua')">UA</button>
-        <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <div class="header">
+        <button id="btn-ru" class="lang-btn" onclick="setLang('ru')">RU</button>
+        <button id="btn-ua" class="lang-btn active" onclick="setLang('ua')">UA</button>
+        <button id="btn-en" class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
 
-    <header>
-        <div class="logo-container">
-            <h1 id="main-title">DRAGON STUDIO</h1>
-        </div>
-        <p class="subtitle" id="main-sub">Creating the Impossible</p>
-    </header>
+    <div class="hero">
+        <h1>DRAGON STUDIO</h1>
+        <p id="hero-sub">Створюємо неможливе</p>
+    </div>
 
+    <h2 id="dev-title" class="section-title">Наші розробки</h2>
+    
     <div class="container">
-        <section>
-            <h2 id="sect-projects">Наші розробки</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-preview">💰</div>
-                    <div class="project-content">
-                        <h3>Dragon Clicker</h3>
-                        <p id="desc-clicker">Твій шлях до першого мільйона золотих монет.</p>
-                    </div>
-                    <a href="https://drive.google.com/file/d/1Ln3_qwQ2aGn4XDJ_VHpvhRtsw7mBEVYu/view?usp=sharing">ЗАВАНТАЖИТИ</a>
-                </div>
-                <div class="project-card">
-                    <div class="project-preview">🎨</div>
-                    <div class="project-content">
-                        <h3>Mimpi DLC</h3>
-                        <p id="desc-mimpi">Нові рівні та захоплюючий сюжет.</p>
-                    </div>
-                    <a href="#" class="download-btn" id="btn-2">ЗАВАНТАЖИТИ</a>
-                </div>
-            </div>
-        </section>
+        <div class="card">
+            <h3>Dragon Clicker</h3>
+            <p id="desc-clicker">Твій шлях до першого мільйона золотих монет.</p>
+            <a href="D:\dragon studio site\files\dragonCliker.apk" download class="btn">СКАЧАТИ ГРУ</a>
+        </div>
 
-        <section style="margin-top: 80px;">
-            <h2 id="sect-team">Команда</h2>
-            <div class="team-members">
-                <div class="member-card">
-                    <div class="avatar-img" id="avatar-owner"></div>
-                    <h3>danya_draconchik1</h3>
-                    <p id="role-owner">Засновник / Lead Dev</p>
-                </div>
-                <div class="member-card">
-                    <div class="avatar-img" id="avatar-co"></div>
-                    <h3>koshka_ray</h3>
-                    <p id="role-co">Співвласник / Designer</p>
-                </div>
-            </div>
-        </section>
+        <div class="card">
+            <h3>Mimpi DLC</h3>
+            <p id="desc-mimpi">Нові рівні та захоплюючий сюжет для Mimpi Dreams.</p>
+            <div class="btn disabled" id="btn-mimpi">СКОРО ВИЙДЕ</div>
+        </div>
     </div>
 
-    <!-- SUPPORT WINDOW -->
-    <div class="support-window">
-        <h4 id="supp-title">ПІДТРИМКА</h4>
-        <a href="https://t.me/Koshka_Ray" target="_blank" class="support-tg-btn" id="supp-btn">НАПИСАТИ</a>
+    <h2 id="team-title" class="section-title">Команда</h2>
+    <div class="team-container">
+        <div class="member-card">
+            <img src="photos/danya.jpg" class="member-photo">
+            <span class="member-name">Danya_Draconchik1</span>
+            <div class="member-role" id="role-owner">власник</div>
+        </div>
+        <div class="member-card">
+            <img src="photos/sonya.jpg" class="member-photo">
+            <span class="member-name">Koshka_Ray</span>
+            <div class="member-role" id="role-coowner">спів власник</div>
+        </div>
     </div>
 
-    <footer>
-        <p id="footer-text">&copy; 2026 Dragon Studio. danya_draconchik1 & koshka_ray</p>
-    </footer>
+    <div class="support-widget">
+        <p id="support-label">Підтримка</p>
+        <a href="https://t.me/Koshka_Ray" target="_blank" class="write-btn" id="write-text">НАПИСАТИ</a>
+    </div>
 
     <script>
-        const texts = {
-            ru: {
-                sub: "Создаем невозможное",
-                projects: "Наши разработки",
-                team: "Команда",
-                clicker: "Твой путь к первому миллиону золотых монет.",
-                mimpi: "Новые уровни и захватывающий сюжет.",
-                owner: "Создатель / Lead Dev",
-                co: "Со-владелец / Designer",
-                btn: "СКАЧАТЬ",
-                suppTitle: "ПОДДЕРЖКА",
-                suppBtn: "НАПИСАТЬ",
-                footer: "© 2026 Dragon Studio. Все права защищены."
+        const translations = {
+            'ua': {
+                hero: 'Створюємо неможливе', dev: 'Наші розробки', team: 'Команда',
+                clicker: 'Твій шлях до першого мільйона золотих монет.',
+                mimpi: 'Нові рівні та захоплюючий сюжет для Mimpi Dreams.',
+                mimpi_btn: 'СКОРО ВИЙДЕ', sup_label: 'Підтримка', write: 'НАПИСАТИ',
+                owner: 'власник', coowner: 'спів власник'
             },
-            ua: {
-                sub: "Створюємо неможливе",
-                projects: "Наші розробки",
-                team: "Команда",
-                clicker: "Твій шлях до першого мільйона золотих монет.",
-                mimpi: "Нові рівні та захоплюючий сюжет.",
-                owner: "Засновник / Lead Dev",
-                co: "Співвласник / Designer",
-                btn: "ЗАВАНТАЖИТИ",
-                suppTitle: "ПІДТРИМКА",
-                suppBtn: "НАПИСАТИ",
-                footer: "© 2026 Dragon Studio. Всі права застережені."
+            'ru': {
+                hero: 'Создаем невозможное', dev: 'Наши разработки', team: 'Команда',
+                clicker: 'Твой путь к первому миллиону золотых монет.',
+                mimpi: 'Новые уровни и захватывающий сюжет для Mimpi Dreams.',
+                mimpi_btn: 'СКОРО ВЫЙДЕТ', sup_label: 'Поддержка', write: 'НАПИСАТЬ',
+                owner: 'владелец', coowner: 'совладелец'
             },
-            en: {
-                sub: "Creating the Impossible",
-                projects: "Our Projects",
-                team: "Team",
-                clicker: "Your path to the first million gold coins.",
-                mimpi: "New levels and exciting storyline.",
-                owner: "Owner / Lead Dev",
-                co: "Co-Owner / Designer",
-                btn: "DOWNLOAD",
-                suppTitle: "SUPPORT",
-                suppBtn: "CONTACT",
-                footer: "© 2026 Dragon Studio. All rights reserved."
+            'en': {
+                hero: 'Creating the impossible', dev: 'Our Projects', team: 'Team',
+                clicker: 'Your way to the first million gold coins.',
+                mimpi: 'New levels and an exciting plot for Mimpi Dreams.',
+                mimpi_btn: 'COMING SOON', sup_label: 'Support', write: 'WRITE',
+                owner: 'owner', coowner: 'co-owner'
             }
         };
 
         function setLang(lang) {
-            document.getElementById('main-sub').innerText = texts[lang].sub;
-            document.getElementById('sect-projects').innerText = texts[lang].projects;
-            document.getElementById('sect-team').innerText = texts[lang].team;
-            document.getElementById('desc-clicker').innerText = texts[lang].clicker;
-            document.getElementById('desc-mimpi').innerText = texts[lang].mimpi;
-            document.getElementById('role-owner').innerText = texts[lang].owner;
-            document.getElementById('role-co').innerText = texts[lang].co;
-            document.getElementById('btn-1').innerText = texts[lang].btn;
-            document.getElementById('btn-2').innerText = texts[lang].btn;
-            document.getElementById('supp-title').innerText = texts[lang].suppTitle;
-            document.getElementById('supp-btn').innerText = texts[lang].suppBtn;
-            document.getElementById('footer-text').innerText = texts[lang].footer;
+            document.getElementById('hero-sub').innerText = translations[lang].hero;
+            document.getElementById('dev-title').innerText = translations[lang].dev;
+            document.getElementById('team-title').innerText = translations[lang].team;
+            document.getElementById('desc-clicker').innerText = translations[lang].clicker;
+            document.getElementById('desc-mimpi').innerText = translations[lang].mimpi;
+            document.getElementById('btn-mimpi').innerText = translations[lang].mimpi_btn;
+            document.getElementById('support-label').innerText = translations[lang].sup_label;
+            document.getElementById('write-text').innerText = translations[lang].write;
+            document.getElementById('role-owner').innerText = translations[lang].owner;
+            document.getElementById('role-coowner').innerText = translations[lang].coowner;
 
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+            document.getElementById('btn-' + lang).classList.add('active');
         }
-        
-        setLang('ua');
     </script>
 </body>
 </html>
