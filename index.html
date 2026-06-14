@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Studio</title>
+    <style>
+        html, body {
+            margin: 0; padding: 0;
+            background-color: #0a0a0a; color: white;
+            font-family: 'Segoe UI', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* КНОПКИ МОВ У ВЕРХНЬОМУ КУТКУ */
+        .header {
+            position: absolute; top: 0; right: 0;
+            display: flex; padding: 20px; z-index: 10;
+        }
+        .lang-btn {
+            background: rgba(26, 26, 26, 0.8); color: white; border: 1px solid #333;
+            padding: 5px 15px; margin-left: 5px; cursor: pointer; border-radius: 4px;
+            font-weight: bold; transition: 0.2s;
+        }
+        .lang-btn.active { background: #ff0000; border-color: #ff0000; }
+
+        /* ГОЛОВНИЙ ЕКРАН */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            background: radial-gradient(circle, #2a0000 0%, #0a0a0a 100%);
+            text-align: center;
+        }
+        .hero h1 { font-size: 5rem; margin: 0; letter-spacing: 5px; text-transform: uppercase; }
+        .hero h1 span { color: #ff0000; }
+        .hero p { color: #ccc; font-size: 1.5rem; margin-top: 20px; }
+
+        .section-title { font-size: 2.5rem; margin: 80px 0 40px; text-align: center; }
+        .section-title::after {
+            content: ''; display: block; width: 80px; height: 5px;
+            background: red; margin: 15px auto;
+        }
+
+        /* КОНТЕЙНЕР ДЛЯ КАРТОК ПРОЄКТІВ */
+        .container {
+            display: flex; justify-content: center; gap: 30px;
+            padding: 0 40px; flex-wrap: wrap; margin-bottom: 100px;
+        }
+        .card {
+            background: #111; border-radius: 20px; width: 360px;
+            padding: 40px; border: 1px solid #222; text-align: left;
+            position: relative; box-sizing: border-box;
+        }
+        .card h3 { color: #ff0000; font-size: 1.8rem; margin-bottom: 15px; }
+        .card p { color: #aaa; font-size: 1.1rem; margin-bottom: 40px; min-height: 80px; line-height: 1.4; }
+        .badge { position: absolute; top: 15px; right: 15px; background: #ff0000; font-size: 11px; padding: 3px 10px; border-radius: 4px; font-weight: bold; }
+
+        /* ЧЕРВОНІ КНОПКИ */
+        .btn {
+            display: block; width: 100%; padding: 15px;
+            background-color: transparent; border: 2px solid #ff0000; color: white;
+            text-decoration: none; font-weight: bold; font-size: 1.1rem;
+            border-radius: 8px; text-align: center; box-sizing: border-box;
+            transition: 0.3s ease; cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .btn:last-child { margin-bottom: 0; }
+        .btn:not(.disabled):hover { background-color: #ff0000; color: white; }
+        .btn.disabled { border-color: #444; color: #666; cursor: not-allowed; background: transparent; }
+
+        /* КОМАНДА */
+        .team-container { 
+            display: flex; 
+            justify-content: center; 
+            gap: 40px; 
+            padding: 0 20px 150px; 
+            flex-wrap: wrap; 
+        }
+        .member-card { text-align: center; width: 240px; margin-bottom: 30px; }
+        .member-photo {
+            width: 180px; height: 180px; border-radius: 50%; border: 4px solid red;
+            object-fit: cover; background: #111;
+        }
+        .member-name { margin-top: 15px; font-weight: bold; color: #ff0000; font-size: 1.3rem; display: block; }
+        .member-role { color: #888; font-size: 0.85rem; margin-top: 5px; text-transform: uppercase; min-height: 60px; line-height: 1.4; }
+
+        /* ВІДЖЕТ ПІДТРИМКИ */
+        .support-widget {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #111; border: 2px solid #ff0000;
+            padding: 15px 30px; border-radius: 50px;
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); z-index: 1000;
+        }
+        .support-widget p { margin: 0; font-size: 16px; font-weight: bold; }
+        .write-btn {
+            background: #ff0000; color: white; text-decoration: none;
+            padding: 10px 20px; border-radius: 25px; font-size: 14px;
+            font-weight: bold; transition: 0.3s;
+        }
+        .write-btn:hover { background: white; color: red; }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА З КНОПКАМИ МОВ -->
+    <div class="header">
+        <button id="btn-ru" class="lang-btn" onclick="window.setLanguage('ru')">RU</button>
+        <button id="btn-ua" class="lang-btn active" onclick="window.setLanguage('ua')">UA</button>
+        <button id="btn-en" class="lang-btn" onclick="window.setLanguage('en')">EN</button>
+    </div>
+
+    <!-- ГОЛОВНА СТОРІНКА -->
+    <div class="hero">
+        <h1>DRAGON <span>STUDIO</span></h1>
+        <p id="hero-sub">Створюємо неможливе</p>
+    </div>
+
+    <!-- НАШІ РОЗРОБКИ -->
+    <h2 id="dev-title" class="section-title">Наші розробки</h2>
+    
+    <div class="container">
+        <!-- 1. DRAGON CLICKER -->
+        <div class="card">
+            <h3>Dragon Clicker</h3>
+            <p id="desc-clicker">Твій шлях до першого мільйона золотих монет.</p>
+            <a href="https://drive.usercontent.google.com/download?id=1Ln3_qwQ2aGn4XDJ_VHpvhRtsw7mBEVYu&export=download&authuser=0&confirm=t&uuid=9264dfdb-5cf2-49cf-8eb6-4a743d3719c9&at=AAINaIIGHwkU0wh4AGXcWNcVlLSX:1781433122928" target="_blank" class="btn" id="btn-clicker-demo">СКАЧАТИ ДЕМО</a>
+            <!-- Кнопка з текстом в дужках -->
+            <div class="btn disabled" id="btn-clicker-release">РЕЛІЗ (16 ЧЕРВНЯ)</div>
+        </div>
+
+        <!-- 2. MIMPI DLC -->
+        <div class="card">
+            <h3>Mimpi DLC</h3>
+            <p id="desc-mimpi">Нові рівні та захоплюючий сюжет для Mimpi Dreams.</p>
+            <div class="btn disabled" id="btn-mimpi">РЕЛІЗ ПЕРЕНЕСЕНО</div>
+        </div>
+
+        <!-- 3. DRAGON TWIKER -->
+        <div class="card">
+            <div class="badge" id="badge-new">NEW</div>
+            <h3>DragonTwiker</h3>
+            <p id="desc-twiker">Новий амбітний проєкт від нашої студії. Робота вже ведеться!</p>
+            <div class="btn disabled" id="btn-twiker">В РОЗРОБЦІ</div>
+        </div>
+    </div>
+
+    <!-- КОМАНДА -->
+    <h2 id="team-title" class="section-title">Команда</h2>
+    <div class="team-container">
+        <!-- 1. DANYA -->
+        <div class="member-card">
+            <img src="photos/danya.jpg" class="member-photo">
+            <span class="member-name">Danya_Draconchik1</span>
+            <div class="member-role" id="role-owner">власник</div>
+        </div>
+        <!-- 2. KOSHKA_RAY -->
+        <div class="member-card">
+            <img src="photos/sonya.jpg" class="member-photo">
+            <span class="member-name">Koshka_Ray</span>
+            <div class="member-role" id="role-coowner">співвласник / ТМ / тестер / редактор / дизайнер</div>
+        </div>
+    </div>
+
+    <!-- ВІДЖЕТ ПІДТРИМКИ -->
+    <div class="support-widget">
+        <p id="support-label">Підтримка</p>
+        <a href="https://t.me/Koshka_Ray" target="_blank" class="write-btn" id="write-text">НАПИСАТИ</a>
+    </div>
+
+    <!-- НАДІЙНИЙ СКРИПТ ПЕРЕКЛАДУ -->
+    <script>
+        const langData = {
+            'ua': {
+                hero: 'Створюємо неможливе', dev: 'Наші розробки', team: 'Команда',
+                clicker: 'Твій шлях до першого мільйона золотих монет.', 
+                clicker_demo: 'СКАЧАТИ ДЕМО', clicker_release: 'РЕЛІЗ (16 ЧЕРВНЯ)',
+                mimpi: 'Нові рівні та захоплюючий сюжет для Mimpi Dreams.', mimpi_btn: 'РЕЛІЗ ПЕРЕНЕСЕНО',
+                twiker: 'Новий амбітний проєкт від нашої студії. Робота вже ведеться!', twiker_btn: 'В РОЗРОБЦІ',
+                sup_label: 'Підтримка', write: 'НАПИСАТИ', 
+                owner: 'власник', 
+                coowner: 'співвласник / ТМ / тестер / редактор / дизайнер'
+            },
+            'ru': {
+                hero: 'Создаем невозможное', dev: 'Наши разработки', team: 'Команда',
+                clicker: 'Твой путь к первому миллиону золотых монет.', 
+                clicker_demo: 'СКАЧАТЬ ДЕМО', clicker_release: 'РЕЛИЗ (16 ИЮНЯ)',
+                mimpi: 'Новые уровни и захватывающий сюжет для Mimpi Dreams.', mimpi_btn: 'РЕЛИЗ ПЕРЕНЕСЕН',
+                twiker: 'Новый амбициозный проект от нашей студии. Работа уже ведется!', twiker_btn: 'В РАЗРАБОТКЕ',
+                sup_label: 'Поддержка', write: 'НАПИСАТЬ', 
+                owner: 'владелец', 
+                coowner: 'совладелец / ТМ / тестер / редактор / дизайнер'
+            },
+            'en': {
+                hero: 'Creating the impossible', dev: 'Our Projects', team: 'Team',
+                clicker: 'Your way to the first million gold coins.', 
+                clicker_demo: 'DOWNLOAD DEMO', clicker_release: 'RELEASE (JUNE 16)',
+                mimpi: 'New levels and an exciting plot for Mimpi Dreams.', mimpi_btn: 'RELEASE POSTPONED',
+                twiker: 'A new ambitious project from our studio. Development is underway!', twiker_btn: 'IN DEVELOPMENT',
+                sup_label: 'Support', write: 'WRITE', 
+                owner: 'owner', 
+                coowner: 'co-owner / TM / tester / editor / designer'
+            }
+        };
+
+        window.setLanguage = function(lang) {
+            document.getElementById('hero-sub').innerText = langData[lang].hero;
+            document.getElementById('dev-title').innerText = langData[lang].dev;
+            document.getElementById('team-title').innerText = langData[lang].team;
+            document.getElementById('desc-clicker').innerText = langData[lang].clicker;
+            document.getElementById('btn-clicker-demo').innerText = langData[lang].clicker_demo;
+            document.getElementById('btn-clicker-release').innerText = langData[lang].clicker_release;
+            document.getElementById('desc-mimpi').innerText = langData[lang].mimpi;
+            document.getElementById('btn-mimpi').innerText = langData[lang].mimpi_btn;
+            document.getElementById('desc-twiker').innerText = langData[lang].twiker;
+            document.getElementById('btn-twiker').innerText = langData[lang].twiker_btn;
+            document.getElementById('support-label').innerText = langData[lang].sup_label;
+            document.getElementById('write-text').innerText = langData[lang].write;
+            document.getElementById('role-owner').innerText = langData[lang].owner;
+            document.getElementById('role-coowner').innerText = langData[lang].coowner;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+        }
+    </script>
+</body>
+</html>
