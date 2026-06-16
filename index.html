@@ -103,101 +103,90 @@
 </head>
 <body>
 
-    <!-- ШАПКА З КНОПКАМИ МОВ -->
     <div class="header">
         <button id="btn-ru" class="lang-btn" onclick="window.setLanguage('ru')">RU</button>
         <button id="btn-ua" class="lang-btn active" onclick="window.setLanguage('ua')">UA</button>
         <button id="btn-en" class="lang-btn" onclick="window.setLanguage('en')">EN</button>
     </div>
 
-    <!-- ГОЛОВНА СТОРІНКА -->
     <div class="hero">
         <h1>DRAGON <span>STUDIO</span></h1>
         <p id="hero-sub">Створюємо неможливе</p>
     </div>
 
-    <!-- НАШІ РОЗРОБКИ -->
     <h2 id="dev-title" class="section-title">Наші розробки</h2>
     
     <div class="container">
-        <!-- 1. DRAGON CLICKER -->
         <div class="card">
             <h3>Dragon Clicker</h3>
             <p id="desc-clicker">Твій шлях до першого мільйона золотих монет.</p>
             <a href="https://drive.usercontent.google.com/download?id=1Ln3_qwQ2aGn4XDJ_VHpvhRtsw7mBEVYu&export=download&authuser=0&confirm=t&uuid=9264dfdb-5cf2-49cf-8eb6-4a743d3719c9&at=AAINaIIGHwkU0wh4AGXcWNcVlLSX:1781433122928" target="_blank" class="btn" id="btn-clicker-demo">СКАЧАТИ ДЕМО</a>
-            <div class="btn disabled" id="btn-clicker-release">РЕЛІЗ (16-18 ЧЕРВНЯ)</div>
+            <a href="https://drive.usercontent.google.com/download?id=14uuMsXRa3iPr1dSb8LjMo5RcfPdex4IJ&export=download&authuser=0&confirm=t&uuid=4e049756-fbd9-46f3-bcd6-f1f5bf320c7f&at=AAINaIIl-M0QKH0xFtD-ugnA3Ll3:1781626221415" target="_blank" class="btn" id="btn-clicker-release">ЗАВАНТАЖИТИ РЕЛІЗ</a>
         </div>
 
-        <!-- 2. MIMPI DLC -->
         <div class="card">
             <h3>Mimpi DLC</h3>
             <p id="desc-mimpi">Нові рівні та захоплюючий сюжет для Mimpi Dreams.</p>
             <div class="btn disabled" id="btn-mimpi">РЕЛІЗ ПЕРЕНЕСЕНО</div>
         </div>
 
-        <!-- 3. DRAGON SOUND -->
         <div class="card">
             <h3>DragonSound</h3>
             <p id="desc-dragonsound">музика найголовніше в моему житті.</p>
             <div class="btn disabled" id="btn-dragonsound">РОЗРОБКА</div>
         </div>
-    </div> <!-- Цей тег закриває .container, тепер команда не з'їжджає! -->
+    </div>
 
-    <!-- КОМАНДА -->
     <h2 id="team-title" class="section-title">Команда</h2>
     <div class="team-container">
-        <!-- 1. DANYA -->
         <div class="member-card">
             <img src="danya.jpg" class="member-photo">
             <span class="member-name">Danya_Draconchik1</span>
             <div class="member-role" id="role-owner">власник</div>
         </div>
-        <!-- 2. KOSHKA_RAY -->
         <div class="member-card">
             <img src="sonya.jpg" class="member-photo">
             <span class="member-name">Koshka_Ray</span>
-            <div class="member-role" id="role-coowner">співвласник</div>
+            <div class="member-role" id="role-coowner">співвласник / ТМ / тестер / редактор / дизайнер</div>
         </div>
     </div>
 
-    <!-- ВІДЖЕТ ПІДТРИМКИ -->
     <div class="support-widget">
         <p id="support-label">Підтримка</p>
         <a href="https://t.me/Koshka_Ray" target="_blank" class="write-btn" id="write-text">НАПИСАТИ</a>
     </div>
 
-    <!-- НАДІЙНИЙ СКРИПТ ПЕРЕКЛАДУ -->
     <script>
         const langData = {
             'ua': {
                 hero: 'Створюємо неможливе', dev: 'Наші розробки', team: 'Команда',
                 clicker: 'Твій шлях до першого мільйона золотих монет.', 
-                clicker_demo: 'СКАЧАТИ ДЕМО', clicker_release: 'РЕЛІЗ (16-18 ЧЕРВНЯ)',
+                clicker_demo: 'СКАЧАТИ ДЕМО', clicker_release: 'ЗАВАНТАЖИТИ РЕЛІЗ',
                 mimpi: 'Нові рівні та захоплюючий сюжет для Mimpi Dreams.', mimpi_btn: 'РЕЛІЗ ПЕРЕНЕСЕНО',
                 dragonsound: 'музика найголовніше в моему житті.', dragonsound_btn: 'РОЗРОБКА',
                 sup_label: 'Підтримка', write: 'НАПИСАТИ', 
                 owner: 'власник', 
-                coowner: 'співвласник'
+                coowner: 'співвласник / ТМ / тестер / редактор / дизайнер'
             },
             'ru': {
                 hero: 'Создаем невозможное', dev: 'Наши разработки', team: 'Команда',
                 clicker: 'Твой путь к первому миллиону золотых монет.', 
-                clicker_demo: 'СКАЧАТЬ ДЕМО', clicker_release: 'РЕЛИЗ (16-18 ИЮНЯ)',
+                clicker_demo: 'СКАЧАТЬ ДЕМО', clicker_release: 'СКАЧАТЬ РЕЛИЗ',
                 mimpi: 'Новые уровни и захватывающий сюжет для Mimpi Dreams.', mimpi_btn: 'РЕЛИЗ ПЕРЕНЕСЕН',
                 dragonsound: 'Музыка — самое главное в моей жизни.', dragonsound_btn: 'РАЗРАБОТКА',
                 sup_label: 'Поддержка', write: 'НАПИСАТЬ', 
                 owner: 'владелец', 
-                coowner: 'совладелец'
+                coowner: 'совладелец / ТМ / тестер / редактор / дизайнер'
             },
             'en': {
                 hero: 'Creating the impossible', dev: 'Our Projects', team: 'Team',
                 clicker: 'Your way to the first million gold coins.', 
-                clicker_demo: 'DOWNLOAD DEMO', clicker_release: 'RELEASE (JUNE 16-18)',
+                clicker_demo: 'DOWNLOAD DEMO', clicker_release: 'DOWNLOAD RELEASE',
                 mimpi: 'New levels and an exciting plot for Mimpi Dreams.', mimpi_btn: 'RELEASE POSTPONED',
                 dragonsound: 'Music is the most important thing in my life.', dragonsound_btn: 'IN DEVELOPMENT',
                 sup_label: 'Support', write: 'WRITE', 
                 owner: 'owner', 
-                coowner: 'co-owner'
+                coowner: 'co-owner / TM / tester / editor / designer'
             }
         };
 
